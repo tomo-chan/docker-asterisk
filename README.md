@@ -8,3 +8,9 @@ asterisk version: 13
 1. sudo ./run.sh
 1. cp docker-container.service /etc/systemd/system/docker-container@asterisk.service
 1. systemctl enable docker-container@asterisk.service
+
+# Known issue
+
+* No data valumes for the configuration (Overwrite all settings).
+* CA for WebRTC does not be included.
+* Need to rebuild to update configurations.
