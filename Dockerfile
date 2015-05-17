@@ -1,5 +1,7 @@
 FROM armv7/armhf-ubuntu
 
+MAINTAINER tomo-chan <aradgyma@gmail.com>
+
 RUN apt-get update && \
     apt-get -y install curl tar subversion && \
     apt-get -y install make automake gcc g++ ncurses-dev openssl libssl-dev && \
