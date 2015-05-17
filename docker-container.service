@@ -1,0 +1,10 @@
+[Unit]
+Description=docker-%i
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker start %i
+
+[Install]
+WantedBy=multi-user.target
