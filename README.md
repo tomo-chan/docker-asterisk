@@ -1,4 +1,4 @@
-# docker-asterisk
+# docker-asterisk-armhf
 
 asterisk version: 13
 
@@ -8,6 +8,10 @@ asterisk version: 13
 1. sudo ./run.sh
 1. cp docker-container.service /etc/systemd/system/docker-container@asterisk.service
 1. systemctl enable docker-container@asterisk.service
+
+# Tested On
+
+* Cubox (not cubox-i)
 
 # Known issue
 
