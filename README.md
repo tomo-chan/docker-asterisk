@@ -9,9 +9,12 @@ asterisk version: 13
 1. cp docker-container.service /etc/systemd/system/docker-container@asterisk.service
 1. systemctl enable docker-container@asterisk.service
 
+If you use OpenVPN on docker, you need to run OpenVPN container with --net=host option.
+
 # Tested On
 
 * Cubox (not cubox-i)
+    * kernel is 4.0.2-1
 
 # Known issue
 
