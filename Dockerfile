@@ -32,11 +32,15 @@ RUN curl -sf -L http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13
     make && make install && make samples && make config && ldconfig && \
     rm -fr /tmp/asterisk
 
-ADD sip.conf /etc/asterisk/sip.conf
-ADD extensions.conf /etc/asterisk/extensions.conf
-ADD rtp.conf /etc/asterisk/rtp.conf
+RUN mv /etc/asterisk /etc/asterisk.org
 
 VOLUME ["/etc/asterisk"]
+VOLUME ["/var/log/asterisk"]
 
-EXPOSE 5060/udp 10000/udp 10001/udp 10002/udp 10003/udp 10004/udp 10005/udp 10006/udp 10007/udp 10008/udp 10009/udp
+EXPOSE 5060/udp 8088 10000/udp 10001/udp 10002/udp 10003/udp 10004/udp 10005/udp 10006/udp 10007/udp 10008/udp 10009/udp
 
+WORKDIR /etc/openvpn
+CMD ["asterisk_run"]
+
+ADD ./bin /usr/local/bin
+RUN chmod a+x /usr/local/bin/*
