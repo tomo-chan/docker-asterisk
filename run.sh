@@ -9,6 +9,7 @@ if [ "$(`docker ps -a | grep -e " asterisk "`)" == "" ]; then
   docker run -d --net=host \
     -v `pwd`/etc/asterisk:/etc/asterisk \
     -v `pwd`/var/log/asterisk:/var/log/asterisk \
+    -v /etc/localtime:/etc/localtime:ro \
     --name=$IMAGE tomo-chan/asterisk
 fi
 
