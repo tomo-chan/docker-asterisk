@@ -2,7 +2,7 @@
 
 if [ -z "$(ls -A /etc/asterisk)" ]; then
   mkdir -p /etc/asterisk
-  cp /etc/asterisk.org/* /etc/asterisk/
+  cp -pr /usr/src/asterisk/conf/* /etc/asterisk/
 
   groupadd asterisk
   useradd asterisk -g asterisk -M
@@ -10,10 +10,12 @@ if [ -z "$(ls -A /etc/asterisk)" ]; then
   chown -R asterisk:asterisk /var/lib/asterisk
   chown -R asterisk:asterisk /var/log/asterisk
   chown -R asterisk:asterisk /var/spool/asterisk
+  chown -R asterisk:asterisk /var/run/asterisk
   chown -R asterisk:asterisk /etc/asterisk
   chmod -R u=rwX,g=rX,o= /var/lib/asterisk 
   chmod -R u=rwX,g=rX,o= /var/log/asterisk 
-  chmod -R u=rwX,g=rX,o= /var/spool/asterisk 
+  chmod -R u=rwX,g=rX,o= /var/spool/asterisk
+  chmod -R u=rwX,g=rX,o= /var/run/asterisk 
   chmod -R u=rwX,g=rX,o= /etc/asterisk
 fi
 

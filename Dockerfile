@@ -28,16 +28,16 @@ RUN curl -sf -L http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-13
     ./configure && \
     make menuselect.makeopts && menuselect/menuselect --enable CORE-SOUNDS-JA-WAV --enable CORE-SOUNDS-JA-ULAW --enable CORE-SOUNDS-JA-ALAW \
         --enable CORE-SOUNDS-JA-GSM --enable CORE-SOUNDS-JA-G729 --enable CORE-SOUNDS-JA-G722 --enable CORE-SOUNDS-JA-SLN16 \
-        --enable CORE-SOUNDS-JA-SIREN7 --enable CORE-SOUNDS-JA-SIREN14 menuselect.makeopts && \
+        --enable CORE-SOUNDS-JA-SIREN7 --enable CORE-SOUNDS-JA-SIREN14 \
+        --enable chan_mobile menuselect.makeopts && \
     make && make install && make samples && make config && ldconfig && \
+    mkdir -p /usr/src/asterisk && cp -rp /tmp/asterisk/contrib /usr/src/asterisk && \
     rm -fr /tmp/asterisk
 
-RUN mv /etc/asterisk /etc/asterisk.org
+RUN mv /etc/asterisk /usr/src/asterisk/conf
 
 VOLUME ["/etc/asterisk"]
 VOLUME ["/var/log/asterisk"]
-
-EXPOSE 5060/udp 8088
 
 WORKDIR /etc/asterisk
 CMD ["asterisk_run"]
