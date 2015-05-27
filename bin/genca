@@ -1,0 +1,45 @@
+#!/bin/sh
+
+CN=
+ORG=
+
+usage() {
+    echo "usage: $0 -c COMMON_NAME -o ORGANIZATION_NAME"
+}
+
+while getopts ":co" opt; do
+    case $opt in
+        c)
+            CN=$OPTARG
+            ;;
+        o)
+            ORG=$OPTARG
+            ;;
+        \?)
+            set +x
+            echo "Invalid option: -$OPTARG" >&2
+            usage
+            exit 1
+            ;;
+        :)
+            set +x
+            echo "Option -$OPTARG requires an argument." >&2
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if [ -z "$CN" ]; then
+  echo "Option -c is invalid."
+  exit 1
+fi
+if [ -z "$ORG" ]; then
+  echo "Option -o is invalid."
+  exit 1
+fi
+
+mkdir /etc/asterisk/keys
+cd /usr/src/asterisk/contrib/scripts
+
+./ast_tls_cert -C "$CN" -O "$ORG" -d /etc/asterisk/keys
